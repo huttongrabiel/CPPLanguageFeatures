@@ -42,7 +42,7 @@ void double_buffer_TUI(Screen screen, T print_object) {
     T default_print_object;
     if (typeid(print_object) == typeid(char)) 
         default_print_object = ' ';
-    else if (typeid(print_object) == typeid(int))
+    else
         default_print_object = 0;
 
 
