@@ -10,10 +10,11 @@ struct Screen {
     int width;
     int height;
     
-    Screen(int width, int height) { 
-        this->width = width; 
-        this->height = height; 
-    }
+    Screen(int width, int height) : 
+        width(width), 
+        height(height) 
+    {
+    };
 };
 
 template<typename T>
@@ -62,6 +63,32 @@ void double_buffer_TUI(Screen screen, T print_object) {
             std::system("clear");
             render_screen(frame_buffer);
         }
+    }
+}
+
+void pipes(int height) {
+    std::string pipe;
+
+    while (height--)
+        pipe.insert(pipe.length(), "@");
+    
+    std::vector<std::string> pipes;
+
+    std::string separator = "          ";
+
+    for (int i = 0; i < 4; i++) {
+        pipes.push_back(pipe);
+        pipes.push_back(separator);
+    }
+
+    for (auto x : pipes) {
+        for (auto y : x) {
+            if (x != separator)
+                std::cout << y << std::endl;
+        }
+        std::cout << separator;
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
+        system("clear");
     }
 }
 
