@@ -37,8 +37,31 @@ void is_valid_US_phone_number() {
         std::cout << "Sorry, that phone number is invalid." << std::endl;
 }
 
+void lazy_pattern_matching() {
+    // This pattern is greedy matching, so it will only all "ab matches"
+    std::regex pat { R"((ab)+)" };
+    
+    // This pattern is lazy matching, it will only return the first "ab" it sees
+    std::regex pat1 { R"((ab)+?)" };
+    
+    std::string test_str = "ababababab";
+    
+    std::smatch match;
+    std::regex_match(test_str, match, pat);
+    
+    if (!match.empty())
+        std::cout << match[0] << std::endl;
+
+    std::smatch match1;
+    std::regex_match(test_str, match1, pat1);
+
+    if (!match1.empty())
+        std::cout << match1[0] << std::endl;
+}
+
 int main() {
-    is_valid_postal_code();
-    is_valid_US_phone_number();
+//    is_valid_postal_code();
+//    is_valid_US_phone_number();
+    lazy_pattern_matching();
     return 0;
 }
